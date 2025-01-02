@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Philtech Coding Challenge</string>
+
+    <string name="fetch_users_title">List of Users</string>
+    <string name="generate_user_list_label">Generate User List</string>
+
+    <string name="enter_number_instruction">Please enter a number between 1 and 5000.</string>
+    <string name="enter_number_of_results_label">Enter the desired number of users</string>
+
+    <string name="invalid_input_error">Invalid input. Please enter a value between 1 and 5000.</string>
+    <string name="no_user_selected">No user selected.</string>
+
+    <string name="search_user">Search users...</string>
+    <string name="search_placeholder">Search</string>
+    <string name="no_user_found">No users found.</string>
+
+    <!-- User Details -->
+    <string name="user_address">Address:</string>
+    <string name="user_coordinates">Coordinates:</string>
+    <string name="user_timezone">Timezone:</string>
+
+    <string name="back_placeholder">Back</string>
+    <string name="back_button">Back to Users List</string>
+
+</resources>
