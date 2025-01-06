@@ -51,13 +51,14 @@ The application follows the MVVM (Model-View-ViewModel) architecture:
 
 Unit tests are provided for the `UserViewModel` to ensure its correctness. These include:
 
-1. **Default State Validation**: Ensures the ViewModel initializes correctly.
-2. **Input Validation**: Tests input validation logic.
-3. **User Fetching**: Verifies interactions with the repository for fetching users.
-4. **Error Handling**: Simulates various exceptions and validates UI state updates.
-5. **State Reset**: Confirms proper resetting of the UI state.
-5. **Duplicate Fetch Prevention**: Ensures redundant API calls are avoided.
-
+1. **Default State Validation**: Ensures the ViewModel initializes correctly and shows input by default.
+2. **Input Validation**: Verifies that user input is correctly validated within the range of 1 to 5000, with error messages shown for invalid inputs.
+3. **User Fetching**: Confirms that valid inputs trigger API calls to fetch users and update the UI state with the results.
+4. **Selected User Update**: Ensures that selecting a user correctly updates the selected user in the ViewModel.
+5. **Duplicate Fetch Prevention**: Verifies that the repository is called only once, even if multiple fetch requests are made for the same data.
+6. **UI State Reset**: Confirms that the UI state is properly reset, clearing the users and restoring the initial state.
+7. **Error Handling**: Simulates different errors (network, general, and unknown) during data fetching and ensures the UI state is updated with appropriate error messages.
+8. **Loading State**: Verifies that the loading state behaves correctly during data fetching, showing as true during the fetch and false once it completes.
 
 ## License
 
