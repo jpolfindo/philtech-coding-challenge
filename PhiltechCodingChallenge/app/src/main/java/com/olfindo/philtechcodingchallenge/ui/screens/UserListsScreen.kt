@@ -33,6 +33,15 @@ import com.olfindo.philtechcodingchallenge.R
 import com.olfindo.philtechcodingchallenge.data.model.UserListResponse
 import com.olfindo.philtechcodingchallenge.ui.components.UserCard
 
+/**
+ * A Composable function that displays a list of users with a search bar.
+ * It allows filtering of the users by their names and emails based on the user's input in the search bar.
+ *
+ * @param modifier Modifier to be applied to the outer layout.
+ * @param users List of users to display in the list.
+ * @param onUserClick A callback function that is invoked when a user from the list is clicked.
+ * @param onBackClick A callback function that is invoked when the back button is clicked.
+ */
 @Composable
 fun UsersList(
     modifier: Modifier = Modifier,
@@ -53,6 +62,7 @@ fun UsersList(
         }
     }
 
+    // Scaffold layout for the screen, including top bar and content area
     Scaffold(
         topBar = {
             Column {
@@ -80,7 +90,7 @@ fun UsersList(
                     }
                 }
 
-                // Search Bar
+                // Search Bar for filtering users
                 OutlinedTextField(
                     value = searchText,
                     onValueChange = { searchText = it },
@@ -99,13 +109,14 @@ fun UsersList(
             }
         }
     ) { paddingValues ->
+        // LazyColumn to display the list of filtered users
         LazyColumn(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            // If no filtered users, show a message
             if (filteredUsers.isEmpty()) {
-                // Show message if no results are found
                 item {
                     Text(
                         text = stringResource(id = R.string.no_user_found),

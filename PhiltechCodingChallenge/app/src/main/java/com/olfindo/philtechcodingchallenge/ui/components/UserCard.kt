@@ -15,15 +15,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.olfindo.philtechcodingchallenge.data.model.UserListResponse
+import com.olfindo.philtechcodingchallenge.data.model.*
 import com.olfindo.philtechcodingchallenge.R
-import com.olfindo.philtechcodingchallenge.data.model.CoordinatesResponse
-import com.olfindo.philtechcodingchallenge.data.model.LocationResponse
-import com.olfindo.philtechcodingchallenge.data.model.NameResponse
-import com.olfindo.philtechcodingchallenge.data.model.PictureResponse
-import com.olfindo.philtechcodingchallenge.data.model.StreetResponse
-import com.olfindo.philtechcodingchallenge.data.model.TimezoneResponse
 
+/**
+ * A composable function that displays a card with user details.
+ *
+ * The `UserCard` is designed to present a summary of user information, including their name,
+ * profile picture, location, and coordinates, in a visually appealing card layout. It also provides
+ * a click action that can be customized by the caller.
+ *
+ * @param user The [UserListResponse] containing the user details to display.
+ * @param onClick A lambda function that gets triggered when the card is clicked, passing the clicked [UserListResponse].
+ *
+ * Example usage:
+ * ```
+ * UserCard(
+ *     user = UserListResponse(...),
+ *     onClick = { selectedUser -> handleUserClick(selectedUser) }
+ * )
+ * ```
+ */
 @Composable
 fun UserCard(
     user: UserListResponse,
@@ -73,7 +85,11 @@ fun UserCard(
     }
 }
 
-
+/**
+ * A preview of the [UserCard] composable for development and testing purposes.
+ *
+ * Displays a sample user card with mock data to visualize its layout and design in an IDE.
+ */
 @Preview
 @Composable
 private fun UserCardPreview() {

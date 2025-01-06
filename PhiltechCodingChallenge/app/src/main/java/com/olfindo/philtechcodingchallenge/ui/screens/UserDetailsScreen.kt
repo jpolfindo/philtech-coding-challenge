@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -35,6 +34,17 @@ import com.olfindo.philtechcodingchallenge.ui.navigation.NavigationActions
 import com.olfindo.philtechcodingchallenge.ui.theme.PhiltechCodingChallengeTheme
 import com.olfindo.philtechcodingchallenge.ui.viewmodels.UserViewModel
 
+/**
+ * Composable function to display the detailed view of a selected user.
+ *
+ * This screen shows the detailed information of the selected user, including their profile picture,
+ * name, gender, email, address, coordinates, and timezone.
+ * It also provides a "Back" button to navigate back to the previous screen.
+ *
+ * @param modifier Modifier to be applied to the outer layout.
+ * @param viewModel The [UserViewModel] that holds the user data.
+ * @param navigationActions A set of navigation actions that manage navigation events (e.g., back navigation).
+ */
 @Composable
 fun UserDetailsScreen(
     modifier: Modifier = Modifier,
@@ -43,7 +53,9 @@ fun UserDetailsScreen(
 ) {
 
     Scaffold(modifier = modifier.fillMaxSize()) { paddingValues ->
-        val selectedUser: UserListResponse? = viewModel.selectedUser.value
+
+        // Use the safe accessor from the ViewModel
+        val selectedUser: UserListResponse = viewModel.safeSelectedUser
 
         Column(
             modifier
@@ -52,7 +64,7 @@ fun UserDetailsScreen(
                 .padding(16.dp) // Reduced outer padding for better control over layout
         ) {
             // Show error or loading state if selectedUser is null
-            selectedUser?.let {
+            selectedUser.let {
                 // Profile Picture and Info
                 Card(
                     modifier = Modifier
@@ -121,15 +133,6 @@ fun UserDetailsScreen(
                         Text(text = "${it.location.timezone.offset} ${it.location.timezone.description}")
                     }
                 }
-
-            } ?: run {
-                // Show error or empty state if user is null
-                Text(
-                    text = stringResource(id = R.string.no_user_selected),
-                    style = MaterialTheme.typography.headlineLarge,
-                    color = Color.Red,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
             }
 
             // Back Button
@@ -142,9 +145,13 @@ fun UserDetailsScreen(
             }
         }
     }
-
 }
 
+/**
+ * Preview of the UserDetailsScreen composable.
+ *
+ * This preview displays a sample user details screen with mock data.
+ */
 @Preview
 @Composable
 private fun UserDetailsScreenPreview() {

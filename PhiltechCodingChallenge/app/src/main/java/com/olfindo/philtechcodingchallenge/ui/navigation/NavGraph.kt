@@ -12,6 +12,20 @@ import com.olfindo.philtechcodingchallenge.ui.screens.UserDetailsScreen
 import com.olfindo.philtechcodingchallenge.ui.screens.UserInputScreen
 import com.olfindo.philtechcodingchallenge.ui.viewmodels.UserViewModel
 
+/**
+ * Composable function that defines the navigation graph of the app.
+ *
+ * This function creates and manages the navigation host, defining the navigation routes
+ * and the corresponding screens that should be displayed. The navigation graph is constructed
+ * using the [NavHost] composable and allows users to navigate between different screens
+ * like the user input screen and user details screen.
+ *
+ * @param modifier Modifier to be applied to the NavHost composable.
+ * @param navController The [NavHostController] responsible for managing the navigation stack.
+ * @param startDestination The screen to display first when the app starts.
+ * @param sharedUsersViewModel The [UserViewModel] shared across the screens to manage user data.
+ * @param navActions Navigation actions to handle screen transitions and back stack operations.
+ */
 @Composable
 fun NavGraph(
     modifier: Modifier = Modifier,
@@ -22,7 +36,7 @@ fun NavGraph(
         NavigationActions(navController)
     }
 ) {
-
+    // Set up the navigation graph with defined destinations
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -47,6 +61,5 @@ fun NavGraph(
                 navigationActions = navActions // Pass navActions to the user details screen as well
             )
         }
-
     }
 }
