@@ -15,6 +15,9 @@
     <string name="no_user_found">No users found.</string>
 
     <!-- User Details -->
+    <string name="user_contact">Contact Numbers:</string>
+    <string name="user_cell">Mobile:</string>
+    <string name="user_phone">Phone:</string>
     <string name="user_address">Address:</string>
     <string name="user_coordinates">Coordinates:</string>
     <string name="user_timezone">Timezone:</string>

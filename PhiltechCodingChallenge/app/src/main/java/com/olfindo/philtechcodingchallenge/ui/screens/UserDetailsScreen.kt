@@ -33,6 +33,7 @@ import com.olfindo.philtechcodingchallenge.data.model.UserListResponse
 import com.olfindo.philtechcodingchallenge.ui.navigation.NavigationActions
 import com.olfindo.philtechcodingchallenge.ui.theme.PhiltechCodingChallengeTheme
 import com.olfindo.philtechcodingchallenge.ui.viewmodels.UserViewModel
+import com.olfindo.philtechcodingchallenge.utils.DateFormatter
 
 /**
  * Composable function to display the detailed view of a selected user.
@@ -51,6 +52,7 @@ fun UserDetailsScreen(
     viewModel: UserViewModel = hiltViewModel(),
     navigationActions: NavigationActions
 ) {
+    val dateFormatter = remember { DateFormatter() } // Create an instance of DateFormatter
 
     Scaffold(modifier = modifier.fillMaxSize()) { paddingValues ->
 
@@ -95,7 +97,8 @@ fun UserDetailsScreen(
                             text = "${it.name.title} ${it.name.first} ${it.name.last}",
                             style = MaterialTheme.typography.headlineLarge
                         )
-                        Text(text = it.gender, style = MaterialTheme.typography.bodyMedium)
+                        Text(text = "${it.gender} | ${it.dob.age} | ${it.nat} ", style = MaterialTheme.typography.bodyMedium)
+                        Text(text = dateFormatter.formatDate(it.dob.date), style = MaterialTheme.typography.bodyMedium)
                         Text(text = it.email, style = MaterialTheme.typography.bodyMedium)
                     }
                 }
@@ -107,6 +110,15 @@ fun UserDetailsScreen(
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = stringResource(id = R.string.user_contact),
+                            style = MaterialTheme.typography.headlineSmall,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                        Text(text = stringResource(id = R.string.user_cell) + " ${it.cell}")
+                        Text(text = stringResource(id = R.string.user_phone) + " ${it.phone}")
+
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = stringResource(id = R.string.user_address),
                             style = MaterialTheme.typography.headlineSmall,

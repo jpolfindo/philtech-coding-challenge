@@ -111,6 +111,13 @@ private fun UserCardPreview() {
                 "https://test.com/large.jpg",
                 "https://test.com/medium.jpg",
                 "https://test.com/thumbnail.jpg"
+            ),
+            cell = "(098) U60-9769",
+            phone = "(067) G25-9883",
+            nat = "PH",
+            dob = BirthDateResponse(
+                date = "1995-05-11T01:28:14.666Z",
+                age = 29
             )
         ),
         onClick = {}

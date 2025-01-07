@@ -24,7 +24,11 @@ data class UserListResponse(
     val gender: String,
     val location: LocationResponse,
     val email: String,
-    val picture: PictureResponse
+    val picture: PictureResponse,
+    val cell: String,
+    val phone: String,
+    val nat: String,
+    val dob: BirthDateResponse
 )
 
 /**
@@ -38,6 +42,17 @@ data class NameResponse(
     val title: String,
     val first: String,
     val last: String
+)
+
+/**
+ * Represents the birth details of a user.
+ *
+ * @property date The user's date of birth (e.g., 1949-03-20T01:28:14.666Z).
+ * @property age The user's age.
+ */
+data class BirthDateResponse(
+    val date: String,
+    val age: Int
 )
 
 /**
@@ -131,6 +146,13 @@ fun UserListResponse?.orDefault(): UserListResponse {
             large = "https://example.com/default_large.jpg",
             medium = "https://example.com/default_medium.jpg",
             thumbnail = "https://example.com/default_thumbnail.jpg"
+        ),
+        cell = "Unknown Mobile Number",
+        phone = "Unknown Phone Number",
+        nat = "Unknown Nationality",
+        dob = BirthDateResponse(
+            date = "Unknown Birthdate",
+            age = 0
         )
     )
 }

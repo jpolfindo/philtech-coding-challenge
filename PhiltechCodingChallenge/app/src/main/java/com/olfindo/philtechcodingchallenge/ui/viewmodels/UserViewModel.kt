@@ -48,6 +48,8 @@ open class UserViewModel @Inject constructor(
     // Job for controlling the fetch users operation.
     private var fetchJob: Job? = null
 
+    private var hasFetchedUsers = false
+
     /**
      * Fetches a list of users from the repository.
      * Cancels any ongoing fetch job and starts a new one.
@@ -57,21 +59,22 @@ open class UserViewModel @Inject constructor(
     open fun fetchUsers(count: Int) {
         fetchJob?.cancel() // Cancel any ongoing job before starting a new one.
 
-        // Start a new fetch job
-        fetchJob = viewModelScope.launch {
+        if (!hasFetchedUsers) {
             updateUIState(isLoading = true, showInput = false)
-            try {
-                // Attempt to fetch users with a timeout of 30000ms (30 seconds)
-                val result = withTimeout(Constants.REQUEST_TIMEOUT) {
-                    userRepository.getUsers(count)
+
+            // Start a new fetch job
+            fetchJob = viewModelScope.launch {
+                try {
+                    val result = userRepository.getUsers(count)
+                    updateUIState(users = result, isLoading = false)
+                    hasFetchedUsers = true
+                } catch (e: TimeoutCancellationException) {
+                    handleError(e, ErrorType.TIMEOUT)
+                } catch (e: NetworkErrorException) {
+                    handleError(e, ErrorType.NETWORK)
+                } catch (e: Exception) {
+                    handleError(e, ErrorType.UNKNOWN)
                 }
-                updateUIState(users = result, isLoading = false)
-            } catch (e: TimeoutCancellationException) {
-                handleError(e, ErrorType.TIMEOUT)
-            } catch (e: NetworkErrorException) {
-                handleError(e, ErrorType.NETWORK)
-            } catch (e: Exception) {
-                handleError(e, ErrorType.UNKNOWN)
             }
         }
     }
@@ -106,6 +109,7 @@ open class UserViewModel @Inject constructor(
     open fun resetUIState() {
         _uiState.value = UsersUiState()
         _selectedUser.value = null
+        hasFetchedUsers = false
     }
 
     /**
