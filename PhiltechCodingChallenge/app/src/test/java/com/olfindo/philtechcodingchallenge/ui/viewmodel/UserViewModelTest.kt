@@ -1,6 +1,7 @@
 package com.olfindo.philtechcodingchallenge.ui.viewmodel
 
 import android.accounts.NetworkErrorException
+import com.olfindo.philtechcodingchallenge.data.model.BirthDateResponse
 import com.olfindo.philtechcodingchallenge.data.model.CoordinatesResponse
 import com.olfindo.philtechcodingchallenge.data.model.LocationResponse
 import com.olfindo.philtechcodingchallenge.data.model.NameResponse
@@ -247,7 +248,14 @@ class UserViewModelTest {
                     timezone = TimezoneResponse("+08:00", "Philippine Standard Time")
                 ),
                 email = "coding.challenge@example.com",
-                picture = PictureResponse("large_url", "medium_url", "thumbnail_url")
+                picture = PictureResponse("large_url", "medium_url", "thumbnail_url"),
+                cell = "(098) U60-9769",
+                phone = "(067) G25-9883",
+                nat = "PH",
+                dob = BirthDateResponse(
+                    date = "1995-05-11T01:28:14.666Z",
+                    age = 29
+                )
             )
         )
         const val MOCK_ERROR = "Mock Error"
